@@ -29,14 +29,10 @@ public class User {
     @PastOrPresent
     private LocalDate createdAt = LocalDate.now();
 
-
+    
     public User(@Email @NotBlank String login, @NotBlank @Size(min = 6) String password) {
         this.login = login;
         this.password = new BCryptPasswordEncoder().encode(password);
-    }
-
-    private String testEncode(String password){
-        new BCryptPasswordEncoder().dec
     }
 
     public User() {
