@@ -1,6 +1,7 @@
 package com.micaelps.ecommerce.models;
 
 
+import com.micaelps.ecommerce.validators.UniqueValue;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;

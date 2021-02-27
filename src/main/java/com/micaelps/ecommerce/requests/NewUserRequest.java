@@ -2,6 +2,7 @@ package com.micaelps.ecommerce.requests;
 
 
 import com.micaelps.ecommerce.models.User;
+import com.micaelps.ecommerce.validators.UniqueValue;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -13,6 +14,7 @@ public class NewUserRequest {
 
     @Email
     @NotBlank
+    @UniqueValue(fieldName = "login", domainClass = User.class)
     private String login;
     @NotBlank
     @Size(min = 6)

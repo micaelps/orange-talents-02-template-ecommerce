@@ -55,6 +55,4 @@ class NewUserControllerTest {
     private String toJson(NewUserRequest newUserRequest) throws JsonProcessingException {
         return objectMapper.writeValueAsString(newUserRequest);
     }
-
-
 }
