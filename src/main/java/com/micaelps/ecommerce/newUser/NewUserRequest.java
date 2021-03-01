@@ -1,10 +1,8 @@
-package com.micaelps.ecommerce.requests;
+package com.micaelps.ecommerce.newUser;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.micaelps.ecommerce.models.User;
 import com.micaelps.ecommerce.validators.UniqueValue;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.Email;

@@ -1,7 +1,5 @@
-package com.micaelps.ecommerce.controllers;
+package com.micaelps.ecommerce.newUser;
 
-import com.micaelps.ecommerce.requests.NewUserRequest;
-import com.micaelps.ecommerce.models.User;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

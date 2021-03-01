@@ -2,8 +2,8 @@ package com.micaelps.ecommerce.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.micaelps.ecommerce.models.User;
-import com.micaelps.ecommerce.requests.NewUserRequest;
+import com.micaelps.ecommerce.newUser.User;
+import com.micaelps.ecommerce.newUser.NewUserRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,20 +41,20 @@ class NewUserControllerTest {
 
     @Test
     @DisplayName("Shold create new user and return status 200")
-    void should_create_new_user() throws Exception {
+    void create_new_user() throws Exception {
         NewUserRequest newUserRequest = new NewUserRequest("micael@email.com","123456");
 
         postUsers(newUserRequest).andExpect(status().isOk());
-        List<User> select_a_from_user = entityManager.createQuery("from User", User.class).getResultList();
-        User user = select_a_from_user.get(0);
+        List<User> users = entityManager.createQuery("from User", User.class).getResultList();
+        User user = users.get(0);
 
-        assertEquals(select_a_from_user.size(), 1);
+        assertEquals(users.size(), 1);
         assertEquals("micael@email.com", user.getLogin());
     }
 
     @Test
-    @DisplayName("shouldn't create a user with the same email and return 400")
-    void should_not_create_user_with_the_same_email() throws Exception {
+    @DisplayName("Shouldn't create a user with the same email")
+    void create_user_with_the_same_email() throws Exception {
         NewUserRequest newUserRequest = new NewUserRequest("micael@email.com","123456");
         postUsers(newUserRequest).andExpect(status().isOk());
         postUsers(newUserRequest).andExpect(status().isBadRequest());
