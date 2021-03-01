@@ -1,4 +1,4 @@
-package com.micaelps.ecommerce.newUser;
+package com.micaelps.ecommerce.newUserSystem;
 
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,8 +13,7 @@ import java.time.LocalDate;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "users")
-public class User {
+public class UserSystem {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -30,13 +29,15 @@ public class User {
     private LocalDate createdAt = LocalDate.now();
 
     
-    public User(@Email @NotBlank String login, @NotBlank @Size(min = 6) String password) {
+    public UserSystem(@Email @NotBlank String login, @NotBlank @Size(min = 6) String password) {
         this.login = login;
         this.password = new BCryptPasswordEncoder().encode(password);
     }
 
-    public User() {
+    public UserSystem() {
     }
+
+    public String getPassword() {return password; }
 
     public String getLogin() {
         return this.login;

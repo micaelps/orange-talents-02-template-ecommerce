@@ -1,4 +1,4 @@
-package com.micaelps.ecommerce.newUser;
+package com.micaelps.ecommerce.newUserSystem;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,11 +9,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class NewUserRequest {
+public class NewUserSystemRequest {
 
     @Email
     @NotBlank
-    @UniqueValue(fieldName = "login", domainClass = User.class)
+    @UniqueValue(fieldName = "login", domainClass = UserSystem.class)
     @JsonProperty
     private String login;
     @NotBlank
@@ -22,14 +22,14 @@ public class NewUserRequest {
     private String password;
 
 
-    public NewUserRequest(String login, String password) {
+    public NewUserSystemRequest(String login, String password) {
         this.login = login;
         this.password = password;
     }
 
-    public User toModel() {
+    public UserSystem toModel() {
         String encodedPassword = new BCryptPasswordEncoder().encode(this.password);
-        return new User(this.login, encodedPassword);
+        return new UserSystem(this.login, encodedPassword);
     }
 
 
