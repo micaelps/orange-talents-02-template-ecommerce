@@ -6,7 +6,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
@@ -20,7 +19,7 @@ public class UserSystem {
     private Long id;
     @Email
     @NotBlank
-    private String login;
+    private String email;
     @NotBlank
     @Size(min = 6)
     private String password;
@@ -30,7 +29,7 @@ public class UserSystem {
 
     
     public UserSystem(@Email @NotBlank String login, @NotBlank @Size(min = 6) String password) {
-        this.login = login;
+        this.email = login;
         this.password = new BCryptPasswordEncoder().encode(password);
     }
 
@@ -39,7 +38,7 @@ public class UserSystem {
 
     public String getPassword() {return password; }
 
-    public String getLogin() {
-        return this.login;
+    public String getEmail() {
+        return this.email;
     }
 }

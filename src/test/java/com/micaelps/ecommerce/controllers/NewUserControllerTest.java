@@ -45,11 +45,11 @@ class NewUserControllerTest {
         NewUserSystemRequest newUserRequest = new NewUserSystemRequest("micael@email.com","123456");
 
         postUsers(newUserRequest).andExpect(status().isOk());
-        List<UserSystem> users = entityManager.createQuery("from User", UserSystem.class).getResultList();
+        List<UserSystem> users = entityManager.createQuery("from UserSystem", UserSystem.class).getResultList();
         UserSystem user = users.get(0);
 
         assertEquals(users.size(), 1);
-        assertEquals("micael@email.com", user.getLogin());
+        assertEquals("micael@email.com", user.getEmail());
     }
 
     @Test
