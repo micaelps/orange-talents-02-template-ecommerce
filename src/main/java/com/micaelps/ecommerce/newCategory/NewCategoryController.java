@@ -18,7 +18,7 @@ public class NewCategoryController {
 
     @Transactional
     @PostMapping(path = "/categories")
-    public void executa(@RequestBody @Valid NewCategoryRequest request) {
+    public void save(@RequestBody @Valid NewCategoryRequest request) {
         Category category = request.hasSuperiorCategory() ? request.toModel(em) : request.toModel();
         em.persist(category);
     }

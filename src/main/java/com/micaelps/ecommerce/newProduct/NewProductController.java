@@ -1,4 +1,4 @@
-package com.micaelps.ecommerce.newUserSystem;
+package com.micaelps.ecommerce.newProduct;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,15 +10,17 @@ import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 @RestController
-public class NewUserSystemController {
+public class NewProductController {
+
 
     @PersistenceContext
     EntityManager entityManager;
 
     @Transactional
-    @PostMapping(path = "/users")
-    public void save(@RequestBody @Valid NewUserSystemRequest newUserRequest){
-        UserSystem model = newUserRequest.toModel();
-        entityManager.persist(model);
+    @PostMapping(path = "/products")
+    public String save(@RequestBody @Valid Object obj) {
+//        Model model = obj.toModel();
+//        entityManager.persistence(model);
+        return obj.toString();
     }
 }

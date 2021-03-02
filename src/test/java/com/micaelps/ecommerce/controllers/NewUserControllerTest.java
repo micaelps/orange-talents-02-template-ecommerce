@@ -63,7 +63,7 @@ class NewUserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(toJson(newUserRequest))).andExpect(status().isBadRequest());
     }
-    
+
     private String toJson(NewUserSystemRequest newUserRequest) throws JsonProcessingException {
         return objectMapper.writeValueAsString(newUserRequest);
     }
