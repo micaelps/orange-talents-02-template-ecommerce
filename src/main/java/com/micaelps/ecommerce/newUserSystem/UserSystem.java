@@ -28,9 +28,9 @@ public class UserSystem {
     private LocalDate createdAt = LocalDate.now();
 
     
-    public UserSystem(@Email @NotBlank String login, @NotBlank @Size(min = 6) String password) {
-        this.email = login;
-        this.password = new BCryptPasswordEncoder().encode(password);
+    public UserSystem(@Email @NotBlank String email, @NotBlank @Size(min = 6) String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public UserSystem() {

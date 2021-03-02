@@ -13,23 +13,23 @@ public class NewUserSystemRequest {
 
     @Email
     @NotBlank
-    @UniqueValue(fieldName = "login", domainClass = UserSystem.class)
+    @UniqueValue(fieldName = "email", domainClass = UserSystem.class)
     @JsonProperty
-    private String login;
+    private String email;
     @NotBlank
     @Size(min = 6)
     @JsonProperty
     private String password;
 
 
-    public NewUserSystemRequest(String login, String password) {
-        this.login = login;
+    public NewUserSystemRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
     public UserSystem toModel() {
         String encodedPassword = new BCryptPasswordEncoder().encode(this.password);
-        return new UserSystem(this.login, encodedPassword);
+        return new UserSystem(this.email, encodedPassword);
     }
 
 
