@@ -44,28 +44,26 @@ class NewUserControllerTest {
     void create_new_user() throws Exception {
         NewUserSystemRequest newUserRequest = new NewUserSystemRequest("micael@email.com","123456");
 
-        postUsers(newUserRequest).andExpect(status().isOk());
-        List<UserSystem> users = entityManager.createQuery("from UserSystem", UserSystem.class).getResultList();
-        UserSystem user = users.get(0);
+        mockMvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(toJson(newUserRequest))).andExpect(status().isOk());
 
-        assertEquals(users.size(), 1);
+        List<UserSystem> users = entityManager.createQuery("from UserSystem", UserSystem.class).getResultList();
+        UserSystem user = users.get(1);
+
+        assertEquals(users.size(), 2);
         assertEquals("micael@email.com", user.getEmail());
     }
 
     @Test
     @DisplayName("Shouldn't create a user with the same email")
     void create_user_with_the_same_email() throws Exception {
-        NewUserSystemRequest newUserRequest = new NewUserSystemRequest("micael@email.com","123456");
-        postUsers(newUserRequest).andExpect(status().isOk());
-        postUsers(newUserRequest).andExpect(status().isBadRequest());
-    }
-
-    private ResultActions postUsers(NewUserSystemRequest newUserRequest) throws Exception {
-        return mockMvc.perform(post("/users")
+        NewUserSystemRequest newUserRequest = new NewUserSystemRequest("m@email.com","123456");
+        mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(newUserRequest)));
+                .content(toJson(newUserRequest))).andExpect(status().isBadRequest());
     }
-
+    
     private String toJson(NewUserSystemRequest newUserRequest) throws JsonProcessingException {
         return objectMapper.writeValueAsString(newUserRequest);
     }
