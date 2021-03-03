@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 public class NewProductController {
@@ -18,9 +19,8 @@ public class NewProductController {
 
     @Transactional
     @PostMapping(path = "/products")
-    public String save(@RequestBody @Valid Object obj) {
-//        Model model = obj.toModel();
-//        entityManager.persistence(model);
-        return obj.toString();
+    public void save(@RequestBody @Valid NewProductRequest request) {
+        Product model = request.toModel(entityManager);
+        entityManager.persist(model);
     }
 }

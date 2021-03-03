@@ -64,17 +64,14 @@ class NewCategoryControllerTest {
     @DisplayName("Should create new category with all arguments")
     void create_new_category_all_arguments() throws Exception {
         entityManager.persist(new NewCategoryRequest("Nacional").toModel());
-        Category categories = entityManager.createQuery("from Category", Category.class).getSingleResult();
-        System.out.println(">>>>>>>>>>>>>>>> "+categories);
         NewCategoryRequest newUserRequest = new NewCategoryRequest("drama",1l);
 
         mockMvc.perform(post("/categories")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(toJson(newUserRequest))).andExpect(status().isOk());
 
-
-//        List<Category> categories = entityManager.createQuery("from Category", Category.class).getResultList();
-//        assertEquals(categories.size(), 1);
+        List<Category> categories = entityManager.createQuery("from Category", Category.class).getResultList();
+        assertEquals(categories.size(), 2);
 
     }
 
