@@ -44,7 +44,7 @@ class NewCategoryControllerTest {
     @WithUserDetails("m@email.com")
     @DisplayName("Should create new category without superior category")
     void create_new_category_without_superior_category() throws Exception {
-        NewCategoryRequest newUserRequest = new NewCategoryRequest("drama",null);
+        NewCategoryRequest newUserRequest = new NewCategoryRequest("Agro",null);
 
         mockMvc.perform(post("/categories")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -52,10 +52,10 @@ class NewCategoryControllerTest {
                 .andExpect(status().isOk());
 
         List<Category> categories = entityManager.createQuery("from Category", Category.class).getResultList();
-        Category category = categories.get(0);
+        Category category = categories.get(1);
 
-        assertEquals(categories.size(), 1);
-        assertEquals("drama", category.getName());
+        assertEquals(categories.size(), 2);
+        assertEquals("Agro", category.getName());
     }
 
 
@@ -63,8 +63,7 @@ class NewCategoryControllerTest {
     @WithUserDetails("m@email.com")
     @DisplayName("Should create new category with all arguments")
     void create_new_category_all_arguments() throws Exception {
-        entityManager.persist(new NewCategoryRequest("Nacional").toModel());
-        NewCategoryRequest newUserRequest = new NewCategoryRequest("drama",1l);
+        NewCategoryRequest newUserRequest = new NewCategoryRequest("Peças de Maquinaria Pesada",1l);
 
         mockMvc.perform(post("/categories")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -86,7 +85,7 @@ class NewCategoryControllerTest {
                 .content(toJson(newUserRequest))).andExpect(status().isBadRequest());
 
         List<Category> categories = entityManager.createQuery("from Category", Category.class).getResultList();
-        assertEquals(categories.size(), 0);
+        assertEquals(categories.size(), 1);
     }
 
 

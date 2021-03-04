@@ -24,26 +24,33 @@ import java.util.Set;
 public class NewProductRequest {
 
     @NotBlank
+    @JsonProperty
     private String name;
 
     @NotNull
     @Min(value = 1)
+    @JsonProperty
     private BigDecimal price;
 
     @NotNull
     @Min(value = 0)
+    @JsonProperty
     private Integer amount;
 
     @Size(min = 3)
     @Valid
+    @JsonProperty
     List<AttributeRequest> attributes = new ArrayList<>();
 
     @Size(max = 500)
+    @JsonProperty
     private String description;
 
     @ExistsId(domainClass = Category.class)
+    @JsonProperty
     private Long category;
 
+    @JsonCreator
     public NewProductRequest(@NotBlank String name, @NotNull @Min(value = 1) BigDecimal price, @NotNull @Min(value = 0) Integer amount, @Size(min = 3) List<AttributeRequest> attributes, @Size(max = 500) String description, Long category) {
         this.name = name;
         this.price = price;
@@ -56,8 +63,6 @@ public class NewProductRequest {
     public List<AttributeRequest> getAttributes() {
         return attributes;
     }
-
-
 
 
     @Override

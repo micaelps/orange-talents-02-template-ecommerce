@@ -13,10 +13,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.jar.Attributes;
 import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -45,6 +42,9 @@ public class Product {
     private UserSystem user;
     private LocalDate createdAt = LocalDate.now();
 
+
+    @Deprecated
+    public Product(){}
 
     public Product(@NotBlank String name,
                    @NotNull @Min(value = 1) BigDecimal price,
