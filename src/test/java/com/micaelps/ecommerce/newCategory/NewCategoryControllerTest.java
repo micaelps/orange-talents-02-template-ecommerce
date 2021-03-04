@@ -1,4 +1,4 @@
-package com.micaelps.ecommerce.controllers;
+package com.micaelps.ecommerce.newCategory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
