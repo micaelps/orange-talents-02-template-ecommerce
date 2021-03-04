@@ -32,7 +32,7 @@ public class UserSystem {
         this.email = email;
         this.password = password;
     }
-
+    @Deprecated
     public UserSystem() {
     }
 

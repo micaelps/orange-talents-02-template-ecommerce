@@ -32,6 +32,7 @@ public class Category {
         return name;
     }
 
+    @Deprecated
     public Category() {
     }
 

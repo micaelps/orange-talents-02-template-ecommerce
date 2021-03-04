@@ -1,5 +1,10 @@
 package com.micaelps.ecommerce.newProduct;
 
+import com.micaelps.ecommerce.newUserSystem.UserSystem;
+import com.micaelps.ecommerce.security.LoggedUser;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
-import java.util.Map;
 
 @RestController
 public class NewProductController {
@@ -19,8 +23,11 @@ public class NewProductController {
 
     @Transactional
     @PostMapping(path = "/products")
-    public void save(@RequestBody @Valid NewProductRequest request) {
-        Product model = request.toModel(entityManager);
+    public String save(@RequestBody @Valid NewProductRequest request, @AuthenticationPrincipal LoggedUser loggedUser) {
+        UserSystem user = loggedUser.get();
+        Product model = request.toModel(entityManager, user);
         entityManager.persist(model);
+        return request.toString();
+
     }
 }
