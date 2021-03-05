@@ -2,9 +2,7 @@ package com.micaelps.ecommerce.newProduct;
 
 import com.micaelps.ecommerce.newUserSystem.UserSystem;
 import com.micaelps.ecommerce.security.LoggedUser;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

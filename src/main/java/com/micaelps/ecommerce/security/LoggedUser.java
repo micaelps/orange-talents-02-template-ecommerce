@@ -1,15 +1,14 @@
 package com.micaelps.ecommerce.security;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import com.micaelps.ecommerce.newUserSystem.UserSystem;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.Collection;
+import java.util.List;
 
 
 public class LoggedUser implements UserDetails {

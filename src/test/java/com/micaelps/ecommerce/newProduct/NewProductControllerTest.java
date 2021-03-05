@@ -3,8 +3,8 @@ package com.micaelps.ecommerce.newProduct;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.micaelps.ecommerce.newCategory.Category;
-import com.micaelps.ecommerce.newCategory.NewCategoryRequest;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

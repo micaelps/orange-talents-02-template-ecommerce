@@ -2,7 +2,6 @@ package com.micaelps.ecommerce.newProduct;
 
 import com.micaelps.ecommerce.newCategory.Category;
 import com.micaelps.ecommerce.newUserSystem.UserSystem;
-import com.micaelps.ecommerce.validators.ExistsId;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;

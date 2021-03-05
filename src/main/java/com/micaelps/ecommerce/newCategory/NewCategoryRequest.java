@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.micaelps.ecommerce.validators.ExistsId;
 
 import javax.persistence.EntityManager;
-import java.util.Optional;
 
 public class NewCategoryRequest {
 
