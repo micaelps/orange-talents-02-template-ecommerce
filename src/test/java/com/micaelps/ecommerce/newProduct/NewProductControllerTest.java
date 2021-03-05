@@ -41,7 +41,7 @@ class NewProductControllerTest {
 
     @Test
     @WithUserDetails("m@email.com")
-    @DisplayName("Should create new category and return status 200")
+    @DisplayName("Should create new product and return status 200")
     void create_new_product() throws Exception {
         List<Category> categories = entityManager.createQuery("from Category", Category.class).getResultList();
         List<AttributeRequest> attributeRequests = new ArrayList<>();
@@ -62,7 +62,7 @@ class NewProductControllerTest {
 
     @Test
     @WithUserDetails("m@email.com")
-    @DisplayName("Shouldn't create new category with attributes < 3, return status 400")
+    @DisplayName("Shouldn't create new product with attributes < 3, return status 400")
     void create_new_product_invalid() throws Exception {
         List<AttributeRequest> attributeRequests = new ArrayList<>();
         attributeRequests.add(new AttributeRequest("beleza", "muito boa"));
