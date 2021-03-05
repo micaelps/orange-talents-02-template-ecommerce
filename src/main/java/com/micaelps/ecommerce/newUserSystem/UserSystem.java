@@ -39,4 +39,6 @@ public class UserSystem {
     public String getEmail() {
         return this.email;
     }
+
+    public Long getId() {return this.id; }
 }
