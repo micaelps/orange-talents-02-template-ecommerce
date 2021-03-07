@@ -86,4 +86,8 @@ public class Product {
         Stream<ImageProduct> imageProductStream = links.stream().map(link -> (new ImageProduct(link, this)));
         this.images.addAll(imageProductStream.collect(Collectors.toList()));
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }

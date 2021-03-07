@@ -47,9 +47,9 @@ class NewUserControllerTest {
                 .content(toJson(newUserRequest))).andExpect(status().isOk());
 
         List<UserSystem> users = entityManager.createQuery("from UserSystem", UserSystem.class).getResultList();
-        UserSystem user = users.get(1);
+        UserSystem user = users.get(2);
 
-        assertEquals(users.size(), 2);
+        assertEquals(users.size(), 3);
         assertEquals("micael@email.com", user.getEmail());
     }
 

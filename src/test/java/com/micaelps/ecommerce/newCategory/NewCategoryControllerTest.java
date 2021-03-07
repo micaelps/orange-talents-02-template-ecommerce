@@ -2,6 +2,7 @@ package com.micaelps.ecommerce.newCategory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,6 +37,11 @@ class NewCategoryControllerTest {
 
     @PersistenceContext
     EntityManager entityManager;
+
+    @BeforeEach
+    void setup() {
+    entityManager.persist(new Category("Geral"));
+    }
 
     @Test
     @WithUserDetails("m@email.com")

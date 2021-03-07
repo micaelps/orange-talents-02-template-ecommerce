@@ -24,7 +24,7 @@ public class NewImageProductController {
     EntityManager entityManager;
 
     @Transactional
-    @PostMapping(path = "/new-image/{productId}")
+    @PostMapping(path = "/images/products/{productId}")
     public ResponseEntity<?> executa(@Valid NewImageProductRequest request, @PathVariable("productId") Long id, @AuthenticationPrincipal LoggedUser loggedUser) {
 
         Product product = entityManager.find(Product.class, id);

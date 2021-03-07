@@ -44,4 +44,8 @@ public class Category {
                 ", category=" + category +
                 '}';
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }
