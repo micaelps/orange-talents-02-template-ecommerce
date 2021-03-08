@@ -2,6 +2,8 @@ package com.micaelps.ecommerce.newProduct;
 
 import com.micaelps.ecommerce.newCategory.Category;
 import com.micaelps.ecommerce.newImageProduct.ImageProduct;
+import com.micaelps.ecommerce.newOpinionProduct.NewOpinionProductRequest;
+import com.micaelps.ecommerce.newOpinionProduct.OpinionProduct;
 import com.micaelps.ecommerce.newUserSystem.UserSystem;
 import org.springframework.util.Assert;
 
@@ -38,6 +40,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
     private List<ImageProduct> images = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    private List<OpinionProduct>  opinios = new ArrayList<>();
 
     @Size(max = 1000)
     private String description;
@@ -82,12 +87,16 @@ public class Product {
         return this.user.getId().equals(userLogged.getId());
     }
 
-    public void associaImagesLinks(List<String> links) {
+    public void associateImagesLinks(List<String> links) {
         Stream<ImageProduct> imageProductStream = links.stream().map(link -> (new ImageProduct(link, this)));
         this.images.addAll(imageProductStream.collect(Collectors.toList()));
     }
 
+    public void associateOpinion(NewOpinionProductRequest newOpinionProductRequest, UserSystem userLogged) {
+        opinios.add(OpinionProduct.of(newOpinionProductRequest, userLogged, this));
+    }
     public Long getId() {
         return this.id;
     }
+
 }

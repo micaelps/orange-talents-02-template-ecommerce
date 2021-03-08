@@ -25,7 +25,7 @@ public class NewImageProductController {
 
     @Transactional
     @PostMapping(path = "/images/products/{productId}")
-    public ResponseEntity<?> executa(@Valid NewImageProductRequest request, @PathVariable("productId") Long id, @AuthenticationPrincipal LoggedUser loggedUser) {
+    public ResponseEntity<?> add(@Valid NewImageProductRequest request, @PathVariable("productId") Long id, @AuthenticationPrincipal LoggedUser loggedUser) {
 
         Product product = entityManager.find(Product.class, id);
         UserSystem userLogged = loggedUser.get();
@@ -35,7 +35,7 @@ public class NewImageProductController {
         }
 
         List<String> links = Uploader.DefaultUploadImage(request.getImages());
-        product.associaImagesLinks(links);
+        product.associateImagesLinks(links);
         entityManager.merge(product);
         return ResponseEntity.ok().build();
     }
