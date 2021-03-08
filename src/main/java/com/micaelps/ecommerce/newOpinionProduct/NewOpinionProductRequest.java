@@ -33,4 +33,8 @@ public class NewOpinionProductRequest {
     public String getDescription() {
         return description;
     }
+
+    public OpinionProduct toModel(UserSystem userLogged, Product product) {
+        return new OpinionProduct(this.nps, this.title, this.description, userLogged, product);
+    }
 }

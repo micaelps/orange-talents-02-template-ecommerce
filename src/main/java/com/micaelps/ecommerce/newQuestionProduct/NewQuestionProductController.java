@@ -1,10 +1,9 @@
-package com.micaelps.ecommerce.newOpinionProduct;
+package com.micaelps.ecommerce.newQuestionProduct;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.micaelps.ecommerce.integrationUtils.SenderMail;
 import com.micaelps.ecommerce.newProduct.Product;
 import com.micaelps.ecommerce.newUserSystem.UserSystem;
 import com.micaelps.ecommerce.security.LoggedUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,33 +20,24 @@ import javax.validation.Valid;
 import java.util.Objects;
 
 @RestController
-public class NewOpinionProductController {
-
-
-    @Autowired
-    ObjectMapper objectMapper;
+public class NewQuestionProductController {
 
     @PersistenceContext
     EntityManager entityManager;
 
     @Transactional
-    @PostMapping(path = "/opinions/products/{productId}")
-    public ResponseEntity<?> save(@RequestBody @Valid NewOpinionProductRequest newOpinionProductRequest,
-                                       @PathVariable Long productId,
-                                       @AuthenticationPrincipal LoggedUser loggedUser) {
-
-        Product product = entityManager.find(Product.class, productId);
+    @PostMapping(path = "/questions/products/{idProduct}")
+    public ResponseEntity<?> save(@RequestBody @Valid NewQuestionProductRequest request, @PathVariable Long idProduct, @AuthenticationPrincipal LoggedUser loggedUser) {
+        Product product = entityManager.find(Product.class, idProduct);
         UserSystem user = loggedUser.get();
 
         if(Objects.isNull(product)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Product id: "+productId+" not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Product id: "+idProduct+" not found");
         }
 
-        OpinionProduct opinion = newOpinionProductRequest.toModel(user, product);
-        entityManager.persist(opinion);
-        return ResponseEntity.ok().build();
+        QuestionProduct questionProduct = request.toModel(user, product);
+        entityManager.persist(questionProduct);
+        SenderMail.sendDefault(user.getEmail(), product.getOwnerEmail(), request.getTitle());
+        return  ResponseEntity.ok().build();
     }
-
-
-
 }

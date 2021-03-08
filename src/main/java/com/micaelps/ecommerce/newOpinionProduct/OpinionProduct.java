@@ -46,17 +46,6 @@ public class OpinionProduct {
         this.product = product;
     }
 
-    public static OpinionProduct of(NewOpinionProductRequest newOpinionProductRequest,
-                                                  UserSystem userLogged,
-                                                  Product product){
-        return new OpinionProduct(newOpinionProductRequest.getNps(),
-                newOpinionProductRequest.getTitle(),
-                newOpinionProductRequest.getDescription(),
-                userLogged,
-                product
-                );
-    }
-
     @Deprecated
     public OpinionProduct() {
     }

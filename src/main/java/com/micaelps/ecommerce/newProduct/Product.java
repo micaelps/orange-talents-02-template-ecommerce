@@ -4,7 +4,10 @@ import com.micaelps.ecommerce.newCategory.Category;
 import com.micaelps.ecommerce.newImageProduct.ImageProduct;
 import com.micaelps.ecommerce.newOpinionProduct.NewOpinionProductRequest;
 import com.micaelps.ecommerce.newOpinionProduct.OpinionProduct;
+import com.micaelps.ecommerce.newQuestionProduct.NewQuestionProductRequest;
+import com.micaelps.ecommerce.newQuestionProduct.QuestionProduct;
 import com.micaelps.ecommerce.newUserSystem.UserSystem;
+import com.micaelps.ecommerce.security.LoggedUser;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -38,11 +41,8 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
     private List<AttributeProduct> attributes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.MERGE)
     private List<ImageProduct> images = new ArrayList<>();
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
-    private List<OpinionProduct>  opinios = new ArrayList<>();
 
     @Size(max = 1000)
     private String description;
@@ -92,11 +92,11 @@ public class Product {
         this.images.addAll(imageProductStream.collect(Collectors.toList()));
     }
 
-    public void associateOpinion(NewOpinionProductRequest newOpinionProductRequest, UserSystem userLogged) {
-        opinios.add(OpinionProduct.of(newOpinionProductRequest, userLogged, this));
-    }
     public Long getId() {
         return this.id;
     }
 
+    public String getOwnerEmail() {
+        return this.user.getEmail();
+    }
 }

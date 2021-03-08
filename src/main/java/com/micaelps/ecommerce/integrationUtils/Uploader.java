@@ -17,4 +17,5 @@ public abstract class Uploader {
                 .collect(Collectors.toList());
     }
 
+    public  abstract List<String> uploadImages(List<MultipartFile> files);
 }
