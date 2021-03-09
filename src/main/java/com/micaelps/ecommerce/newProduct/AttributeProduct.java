@@ -26,9 +26,20 @@ public class AttributeProduct {
     private Product product;
 
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public AttributeProduct(@NotBlank String name, @NotBlank String description, @NotNull @Valid Product product) {
         this.name = name;
         this.description = description;
         this.product = product;
+    }
+
+    public AttributeProduct() {
     }
 }

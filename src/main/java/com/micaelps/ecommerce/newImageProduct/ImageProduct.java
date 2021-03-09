@@ -29,4 +29,8 @@ public class ImageProduct {
     @Deprecated
     public ImageProduct() {
     }
+
+    public String getPath() {
+        return path;
+    }
 }

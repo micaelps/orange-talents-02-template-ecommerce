@@ -1,5 +1,6 @@
 package com.micaelps.ecommerce.newProduct;
 
+import com.micaelps.ecommerce.detailsPage.DetailsProductAttrubutes;
 import com.micaelps.ecommerce.newCategory.Category;
 import com.micaelps.ecommerce.newImageProduct.ImageProduct;
 import com.micaelps.ecommerce.newOpinionProduct.NewOpinionProductRequest;
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,6 +45,12 @@ public class Product {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.MERGE)
     private List<ImageProduct> images = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<QuestionProduct> questions = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<OpinionProduct> opinions = new ArrayList<>();
 
     @Size(max = 1000)
     private String description;
@@ -98,5 +106,32 @@ public class Product {
 
     public String getOwnerEmail() {
         return this.user.getEmail();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public <T>List<T> mapImages(Function<ImageProduct,T> functionMapper) {
+        return this.images.stream().map(functionMapper).collect(Collectors.toList());
+    }
+    public <T>List<T> mapAttributes(Function<AttributeProduct,T> functionMapper) {
+        return this.attributes.stream().map(functionMapper).collect(Collectors.toList());
+    }
+
+    public <T>List<T> mapQuestions(Function<QuestionProduct,T> functionMapper) {
+        return this.questions.stream().map(functionMapper).collect(Collectors.toList());
+    }
+
+    public <T>List<T> mapOpinions(Function<OpinionProduct,T> functionMapper) {
+        return this.opinions.stream().map(functionMapper).collect(Collectors.toList());
     }
 }

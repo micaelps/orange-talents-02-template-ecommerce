@@ -27,10 +27,9 @@ public class QuestionProduct {
     @ManyToOne
     private Product product;
 
-
+    @Deprecated
     public QuestionProduct() {
     }
-
 
     public QuestionProduct(String title, UserSystem user, Product product) {
         this.title = title;
@@ -38,4 +37,7 @@ public class QuestionProduct {
         this.product = product;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
 }

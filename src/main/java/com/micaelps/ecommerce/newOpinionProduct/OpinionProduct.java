@@ -49,4 +49,16 @@ public class OpinionProduct {
     @Deprecated
     public OpinionProduct() {
     }
+
+    public Integer getNps() {
+        return nps;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }
