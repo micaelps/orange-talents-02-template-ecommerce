@@ -28,8 +28,4 @@ public class NewImageProductRequest {
     public List<MultipartFile> getImages() {
         return images;
     }
-
-    public List<String> toLinks() {
-        return this.images.stream().map(image -> image.getName()).collect(Collectors.toList());
-    }
 }

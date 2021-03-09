@@ -134,4 +134,14 @@ public class Product {
     public <T>List<T> mapOpinions(Function<OpinionProduct,T> functionMapper) {
         return this.opinions.stream().map(functionMapper).collect(Collectors.toList());
     }
+
+    public boolean decreaseInvetory(int quantity) {
+        Assert.isTrue(quantity>0,"quantity must be positive");
+        if(this.amount>=quantity){
+            this.amount-= quantity;
+            return true;
+        }
+        return false;
+
+    }
 }
